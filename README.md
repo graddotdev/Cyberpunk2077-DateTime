@@ -12,7 +12,7 @@
 
 **Usage:** Import the module and use the native class in Redscript:
 
-```redscript
+```swift
 import DateTime
 
 let dateTime = new DateTime();
