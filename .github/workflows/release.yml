@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish draft release
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Create build directory
+        run: cmake -E make_directory ${{ github.workspace }}/build
+
+      - name: Configure CMake
+        working-directory: ${{ github.workspace }}/build
+        run: cmake ${{ github.workspace }} -A x64 -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build and bundle
+        id: artifacts
+        run: |
+          & "${{ github.workspace }}/tools/bundle.ps1"
+          $zipPath = (Get-ChildItem "${{ github.workspace }}/dist/*.zip").FullName
+          "zip_path=$zipPath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+        shell: pwsh
+
+      - name: Create draft release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          generate_release_notes: true
+          files: ${{ steps.artifacts.outputs.zip_path }}
