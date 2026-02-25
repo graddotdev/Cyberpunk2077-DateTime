@@ -15,10 +15,14 @@
 ```swift
 import DateTime
 
-let dateTime = new DateTime();
+let dateTime = new DateTime(); // or DateTime.Now();
+// let dateTime = DateTime.FromUnixTimeSeconds(1714233600);
+// let dateTime = DateTime.FromUnixTimeMilliseconds(1714233600000);
+// let dateTime = DateTime.FromUnixTimeNanoseconds(1714233600000000000);
 let seconds = dateTime.ToUnixTimeSeconds();
 let milliseconds = dateTime.ToUnixTimeMilliseconds();
 let nanoseconds = dateTime.ToUnixTimeNanoseconds();
+// https://en.cppreference.com/w/cpp/chrono/system_clock/formatter.html
 let formatted = dateTime.Format("%Y-%m-%d %H:%M:%S");
 ```
 
@@ -32,7 +36,7 @@ let formatted = dateTime.Format("%Y-%m-%d %H:%M:%S");
 
 ```powershell
 cmake -E make_directory build
-cmake -B build -A x64 -DCMAKE_BUILD_TYPE=Release
+cmake -B build -A x64
 cmake --build build --config Release
 ```
 
