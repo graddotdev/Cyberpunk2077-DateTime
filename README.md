@@ -10,7 +10,7 @@
 - `red4ext/plugins/DateTime/DateTime.dll`
 - `red4ext/plugins/DateTime/DateTime.reds`
 
-**Usage:** Import the module and use the native class in Redscript:
+**Usage:** Use the native class in Redscript:
 
 ```swift
 let dateTime = new DateTime(); // or DateTime.Now();
