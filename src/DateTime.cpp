@@ -19,44 +19,34 @@ struct DateTime : Red::IScriptable
         return Red::MakeHandle<DateTime>();
     }
 
-    template <typename T> static Red::Handle<DateTime> FromUnixTime(uint64_t unixTime)
-    {
-        return Red::MakeHandle<DateTime>(TimePoint(T(unixTime)));
-    }
-
     static Red::Handle<DateTime> FromUnixTimeSeconds(uint64_t unixTime)
     {
-        return FromUnixTime<seconds>(unixTime);
+        return Red::MakeHandle<DateTime>(TimePoint(seconds(unixTime)));
     }
 
     static Red::Handle<DateTime> FromUnixTimeMilliseconds(uint64_t unixTime)
     {
-        return FromUnixTime<milliseconds>(unixTime);
+        return Red::MakeHandle<DateTime>(TimePoint(milliseconds(unixTime)));
     }
 
     static Red::Handle<DateTime> FromUnixTimeNanoseconds(uint64_t unixTime)
     {
-        return FromUnixTime<nanoseconds>(unixTime);
-    }
-
-    template <typename T> uint64_t ToUnixTime() const
-    {
-        return duration_cast<T>(timePoint.time_since_epoch()).count();
+        return Red::MakeHandle<DateTime>(TimePoint(nanoseconds(unixTime)));
     }
 
     uint64_t ToUnixTimeSeconds() const
     {
-        return ToUnixTime<seconds>();
+        return duration_cast<seconds>(timePoint.time_since_epoch()).count();
     }
 
     uint64_t ToUnixTimeMilliseconds() const
     {
-        return ToUnixTime<milliseconds>();
+        return duration_cast<milliseconds>(timePoint.time_since_epoch()).count();
     }
 
     uint64_t ToUnixTimeNanoseconds() const
     {
-        return ToUnixTime<nanoseconds>();
+        return duration_cast<nanoseconds>(timePoint.time_since_epoch()).count();
     }
 
     Red::CString Format(Red::CString &specification) const
