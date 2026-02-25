@@ -13,8 +13,6 @@
 **Usage:** Import the module and use the native class in Redscript:
 
 ```swift
-import DateTime
-
 let dateTime = new DateTime(); // or DateTime.Now();
 // let dateTime = DateTime.FromUnixTimeSeconds(1714233600);
 // let dateTime = DateTime.FromUnixTimeMilliseconds(1714233600000);
