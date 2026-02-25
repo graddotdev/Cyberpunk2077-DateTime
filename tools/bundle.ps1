@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 
 function Get-Version {
-    $cppPath = Join-Path $repoRoot "src\DateTime.cpp"
+    $cppPath = Join-Path $repoRoot "src\Main.cpp"
     $content = Get-Content $cppPath -Raw
     if ($content -match 'RED4EXT_SEMVER\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)') {
         return "$($Matches[1]).$($Matches[2]).$($Matches[3])"
@@ -16,7 +16,8 @@ function Invoke-Build {
     try {
         cmake --build build --config Release
         if (-not $?) { throw "CMake build failed." }
-    } finally {
+    }
+    finally {
         Pop-Location
     }
 }
@@ -24,9 +25,10 @@ function Invoke-Build {
 function Copy-Artifacts {
     param([string]$Version)
     $dist = Join-Path $repoRoot "dist\DateTime-$Version"
-    New-Item -ItemType Directory -Force -Path $dist | Out-Null
-    Copy-Item (Join-Path $repoRoot "build\src\Release\DateTime.dll") -Destination $dist -Force
-    Copy-Item (Join-Path $repoRoot "src\DateTime.reds") -Destination $dist -Force
+    $plugin = Join-Path $dist "red4ext\plugins\DateTime"
+    New-Item -ItemType Directory -Force -Path $plugin | Out-Null
+    Copy-Item (Join-Path $repoRoot "build\src\Release\DateTime.dll") -Destination $plugin -Force
+    Copy-Item (Join-Path $repoRoot "src\DateTime.reds") -Destination $plugin -Force
     return $dist
 }
 

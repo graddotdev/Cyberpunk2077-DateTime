@@ -1,11 +1,18 @@
-module DateTime
 
 public native class DateTime {
-  public native func ToUnixTimeSeconds() -> Int64;
+  public native static func Now() -> ref<DateTime>;
 
-  public native func ToUnixTimeMilliseconds() -> Int64;
+  public native static func FromUnixTimeSeconds(unixTime: Uint64) -> ref<DateTime>;
 
-  public native func ToUnixTimeNanoseconds() -> Int64;
+  public native static func FromUnixTimeMilliseconds(unixTime: Uint64) -> ref<DateTime>;
+
+  public native static func FromUnixTimeNanoseconds(unixTime: Uint64) -> ref<DateTime>;
+
+  public native func ToUnixTimeSeconds() -> Uint64;
+
+  public native func ToUnixTimeMilliseconds() -> Uint64;
+
+  public native func ToUnixTimeNanoseconds() -> Uint64;
 
   public native func Format(format: String) -> String;
 }

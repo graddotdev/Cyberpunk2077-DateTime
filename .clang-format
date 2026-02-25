@@ -1,13 +1,12 @@
 ---
-BasedOnStyle: Microsoft
----
 Language: Cpp
-
-AccessModifierOffset: -4
-AlwaysBreakTemplateDeclarations: Yes
-BreakBeforeBraces: Allman
-BreakConstructorInitializers: BeforeComma
-BreakInheritanceList: BeforeComma
-KeepEmptyLinesAtTheStartOfBlocks: false
-PointerAlignment: Left
-SpaceAfterTemplateKeyword: false
+BasedOnStyle: Microsoft
+IndentCaseLabels: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowAllParametersOfDeclarationOnNextLine: false
+AlignAfterOpenBracket: BlockIndent
+BinPackParameters: false
+BinPackArguments: false
+AttributeMacros:
+  - RED4EXT_C_EXPORT
+  - RED4EXT_CALL
