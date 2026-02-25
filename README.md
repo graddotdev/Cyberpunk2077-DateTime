@@ -14,9 +14,9 @@
 
 ```swift
 let dateTime = new DateTime(); // or DateTime.Now();
-// let dateTime = DateTime.FromUnixTimeSeconds(1714233600);
-// let dateTime = DateTime.FromUnixTimeMilliseconds(1714233600000);
-// let dateTime = DateTime.FromUnixTimeNanoseconds(1714233600000000000);
+// let dateTime = DateTime.FromUnixTimeSeconds(1714233600ul);
+// let dateTime = DateTime.FromUnixTimeMilliseconds(1714233600000ul);
+// let dateTime = DateTime.FromUnixTimeNanoseconds(1714233600000000000ul);
 let seconds = dateTime.ToUnixTimeSeconds();
 let milliseconds = dateTime.ToUnixTimeMilliseconds();
 let nanoseconds = dateTime.ToUnixTimeNanoseconds();
